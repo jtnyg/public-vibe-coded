@@ -1,4 +1,4 @@
-# Project 001 — Chrome Extension: Google View Image Button
+# Project 001 Retro — Chrome Extension: Google View Image Button
 
 **Date:** 2026-02-23
 **Complexity:** ⭐
@@ -30,3 +30,4 @@ For my first LLM vibe coding project, I wanted to build a chrome browser extensi
 
 ### What's Next
 - Onto the next! Something with a UI.
+
