@@ -19,7 +19,7 @@ For my second LLM vibe coding project, I wanted to stick with Chrome Extensions 
 - Anyways, I fired Gemini 3 Pro and went back to trusty Claude Opus. I gave Claude my conversation history from Gemini and Claude said: Yup, you're trying to build a chrome tab memory saver? what? No... so clearly something funny is going on with data ingestion. 
 - Claude made a beautiful UI, and told me the code works! Nope. I have it HTML thinking it would be like the View Image project, but wow Linkedin really obfuscates its HTML with random characters strings. 
 - Reviewing the HTML, i saw among the sea of randomly generated div tags names like: [role="listitem"] for the post container and [data-testid="expandable-text-box"] for text, but I wasn't going to parse through all randomly generated html and figure out the regex code (+ learned scraping linkedin breaks their terms and conditions). Ah so I decided to stop. But, silver lining: it would be pretty useful if it worked.
-<br> [Link to Prototype of LinkedIn Post Filter Chrome Extension](PROTOTYPE-linkedin-filter-mockup-v3.html)
+<br> [Link to Prototype of LinkedIn Post Filter Chrome Extension](https://htmlpreview.github.io/?https://github.com/jtnyg/public-vibe-coded/blob/main/002-ChromeExtension-LinkedInFeedFilter%20(Prototype%20Only)/PROTOTYPE-linkedin-filter-mockup-v3.html)
 <br> <img src="claude-output.png" width="400" alt="Claude Output" />
  
 ### Best Practices:
@@ -44,7 +44,7 @@ For my second LLM vibe coding project, I wanted to stick with Chrome Extensions 
 
 ### What Shipped
 - I only got a (very pretty looking) prototype -- would've been great if it worked.
-<br> [Link to Prototype of LinkedIn Post Filter Chrome Extension](PROTOTYPE-linkedin-filter-mockup-v3.html)
+<br> [Link to Prototype of LinkedIn Post Filter Chrome Extension](https://htmlpreview.github.io/?https://github.com/jtnyg/public-vibe-coded/blob/main/002-ChromeExtension-LinkedInFeedFilter%20(Prototype%20Only)/PROTOTYPE-linkedin-filter-mockup-v3.html)
 <br> <img src="claude-output.png" width="400" alt="Claude Output" />
 
 ### What's Next
