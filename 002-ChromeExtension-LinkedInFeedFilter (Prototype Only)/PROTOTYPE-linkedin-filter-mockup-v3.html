@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinkedIn Filter [JTY] – UI Mockup v3</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg-primary: #F5F3EF;
+    --bg-secondary: #FFFFFF;
+    --bg-tertiary: #EDE9E3;
+    --text-primary: #1A1A1A;
+    --text-secondary: #5C5C5C;
+    --text-tertiary: #8C8C8C;
+    --border: #DDD8D0;
+    --accent: #0A66C2;
+    --accent-hover: #084E96;
+    --accent-soft: rgba(10, 102, 194, 0.08);
+    --sponsored: #E8553D;
+    --hiring: #2D8A4E;
+    --ai-hype: #8B5CF6;
+    --job-seeking: #D97706;
+    --general: #6B7280;
+    --custom: #0891B2;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+    --radius: 12px;
+    --radius-sm: 8px;
+    --font: 'DM Sans', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  [data-theme="dark"] {
+    --bg-primary: #141414;
+    --bg-secondary: #1E1E1E;
+    --bg-tertiary: #2A2A2A;
+    --text-primary: #E8E6E1;
+    --text-secondary: #A0A0A0;
+    --text-tertiary: #6A6A6A;
+    --border: #333333;
+    --accent: #4D9DE0;
+    --accent-hover: #6DB3F0;
+    --accent-soft: rgba(77, 157, 224, 0.1);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.2);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.4);
+  }
+
+  body {
+    font-family: var(--font);
+    background: #2A2A2A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .mockup-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .mockup-label {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .popup {
+    width: 540px;
+    max-height: 680px;
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-secondary);
+  }
+  .header-left { display: flex; align-items: center; gap: 10px; }
+  .logo {
+    width: 26px; height: 26px; background: var(--accent); border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 700; font-size: 12px; letter-spacing: -0.5px;
+  }
+  .header-title { font-size: 15px; font-weight: 700; color: var(--text-primary); }
+  .header-title span { font-weight: 400; color: var(--text-tertiary); font-size: 12px; margin-left: 4px; }
+  .header-controls { display: flex; align-items: center; gap: 12px; }
+
+  .toggle-track {
+    width: 38px; height: 20px; background: var(--border); border-radius: 10px;
+    cursor: pointer; position: relative; transition: background 0.2s;
+  }
+  .toggle-track.active { background: var(--accent); }
+  .toggle-track .toggle-thumb {
+    width: 16px; height: 16px; background: white; border-radius: 50%;
+    position: absolute; top: 2px; left: 2px; transition: transform 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  }
+  .toggle-track.active .toggle-thumb { transform: translateX(18px); }
+
+  .theme-btn {
+    width: 30px; height: 30px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--bg-tertiary); color: var(--text-secondary); cursor: pointer;
+    display: flex; align-items: center; justify-content: center; font-size: 14px; transition: all 0.2s;
+  }
+  .theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── TAB BAR ── */
+  .tab-bar {
+    display: flex; background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border); padding: 0 20px;
+  }
+  .tab-btn {
+    padding: 10px 14px; font-family: var(--font); font-size: 13px; font-weight: 500;
+    color: var(--text-tertiary); background: none; border: none; cursor: pointer;
+    border-bottom: 2px solid transparent; transition: all 0.2s;
+  }
+  .tab-btn:hover { color: var(--text-secondary); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ── CONTENT ── */
+  .tab-content { flex: 1; overflow-y: auto; padding: 16px 20px; display: none; }
+  .tab-content.active { display: block; }
+  .tab-content::-webkit-scrollbar { width: 5px; }
+  .tab-content::-webkit-scrollbar-track { background: transparent; }
+  .tab-content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* ── SUMMARY TAB ── */
+  .summary-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .stat-card {
+    padding: 10px 8px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    text-align: center;
+  }
+  .stat-value {
+    font-family: var(--mono); font-size: 20px; font-weight: 700;
+    color: var(--text-primary); line-height: 1;
+  }
+  .stat-value.small-text { font-size: 13px; font-weight: 600; }
+  .stat-label { font-size: 10px; color: var(--text-tertiary); margin-top: 4px; }
+
+  .chart-container {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+  }
+  .chart-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .chart-title { font-size: 12px; font-weight: 600; color: var(--text-secondary); }
+
+  .time-toggle { display: flex; gap: 3px; }
+  .time-btn {
+    font-family: var(--font); font-size: 11px; font-weight: 500;
+    padding: 4px 12px; border-radius: 20px; border: 1px solid var(--border);
+    background: transparent; color: var(--text-tertiary); cursor: pointer; transition: all 0.15s;
+  }
+  .time-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+  .chart-body {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .pie-wrapper {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    flex-shrink: 0;
+  }
+  .pie-svg { width: 180px; height: 180px; transform: rotate(-90deg); }
+  .pie-center-label {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%); text-align: center;
+  }
+  .pie-center-number { font-family: var(--mono); font-size: 20px; font-weight: 700; color: var(--text-primary); line-height: 1.1; }
+  .pie-center-sub { font-family: var(--mono); font-size: 12px; color: var(--text-tertiary); font-weight: 500; }
+  .pie-center-text { font-size: 10px; color: var(--text-tertiary); margin-top: 1px; }
+
+  .pie-tooltip {
+    display: none; position: absolute; background: var(--bg-secondary);
+    border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px;
+    box-shadow: var(--shadow-md); font-size: 12px; color: var(--text-primary);
+    white-space: nowrap; z-index: 10; pointer-events: none;
+  }
+  .pie-tooltip.show { display: block; }
+
+  .chart-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: var(--text-secondary);
+    padding: 5px 8px; border-radius: 6px; cursor: pointer; transition: background 0.15s;
+  }
+  .legend-item:hover { background: var(--accent-soft); }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .legend-label { flex: 1; }
+  .legend-count { font-family: var(--mono); font-size: 11px; color: var(--text-tertiary); }
+  .legend-pct { font-family: var(--mono); font-size: 11px; color: var(--text-tertiary); min-width: 36px; text-align: right; }
+
+  /* ── SETTINGS TAB ── */
+  .section-label {
+    font-size: 10.5px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 1.5px; color: var(--text-tertiary); margin-bottom: 10px;
+  }
+  .section-hint {
+    font-weight: 400; text-transform: none; letter-spacing: 0;
+    font-size: 10.5px; color: var(--text-tertiary);
+  }
+
+  .category-row {
+    background: var(--bg-secondary); border-radius: var(--radius-sm);
+    margin-bottom: 5px; border: 1px solid var(--border); overflow: hidden;
+  }
+  .category-row-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 9px 12px; cursor: pointer; transition: background 0.15s;
+  }
+  .category-row:hover .category-row-header { background: var(--accent-soft); }
+  .cat-left { display: flex; align-items: center; gap: 8px; }
+  .cat-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+  .cat-name { font-size: 13.5px; font-weight: 500; color: var(--text-primary); }
+  .cat-count { font-family: var(--mono); font-size: 11px; color: var(--text-tertiary); margin-left: 4px; }
+  .cat-right { display: flex; align-items: center; gap: 8px; }
+  .cat-expand { font-size: 11px; color: var(--text-tertiary); transition: transform 0.2s; user-select: none; }
+  .category-row.expanded .cat-expand { transform: rotate(180deg); }
+
+  .cat-keywords-panel {
+    display: none; padding: 0 12px 10px 12px; border-top: 1px solid var(--border);
+  }
+  .category-row.expanded .cat-keywords-panel { display: block; }
+  .cat-keywords-label {
+    font-size: 10px; font-weight: 600; color: var(--text-tertiary);
+    margin: 8px 0 5px 0; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .cat-keywords-note {
+    font-size: 11px; color: var(--text-tertiary); font-style: italic; margin: 6px 0 2px 0;
+  }
+
+  .mini-toggle {
+    width: 34px; height: 18px; background: var(--border); border-radius: 9px;
+    cursor: pointer; position: relative; transition: background 0.2s; flex-shrink: 0;
+  }
+  .mini-toggle.active { background: var(--accent); }
+  .mini-toggle .mini-thumb {
+    width: 14px; height: 14px; background: white; border-radius: 50%;
+    position: absolute; top: 2px; left: 2px; transition: transform 0.2s;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  }
+  .mini-toggle.active .mini-thumb { transform: translateX(16px); }
+
+  .drag-handle { color: var(--text-tertiary); font-size: 13px; cursor: grab; opacity: 0.4; line-height: 1; user-select: none; }
+  .drag-handle:hover { opacity: 0.8; }
+  .priority-badge {
+    font-family: var(--mono); font-size: 9px; font-weight: 600; color: var(--text-tertiary);
+    background: var(--bg-tertiary); width: 18px; height: 18px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .lock-icon { font-size: 10px; color: var(--text-tertiary); opacity: 0.6; }
+
+  .tag-input-area {
+    display: flex; flex-wrap: wrap; gap: 5px; padding: 7px 9px;
+    background: var(--bg-tertiary); border: 1px solid var(--border);
+    border-radius: 6px; min-height: 32px; align-items: center;
+  }
+  .tag {
+    display: inline-flex; align-items: center; gap: 3px; padding: 2px 8px;
+    background: var(--accent-soft); color: var(--accent); border-radius: 20px;
+    font-size: 11.5px; font-weight: 500;
+  }
+  .tag .tag-x { cursor: pointer; opacity: 0.6; font-size: 13px; line-height: 1; }
+  .tag .tag-x:hover { opacity: 1; }
+  .tag-placeholder { font-size: 11.5px; color: var(--text-tertiary); }
+
+  .add-category-btn {
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    width: 100%; padding: 8px; margin-top: 4px;
+    background: transparent; border: 1px dashed var(--border); border-radius: var(--radius-sm);
+    font-family: var(--font); font-size: 12px; font-weight: 500;
+    color: var(--text-tertiary); cursor: pointer; transition: all 0.15s;
+  }
+  .add-category-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+
+  .exceptions-box { margin-top: 16px; }
+  .keyword-section { margin-top: 16px; }
+  .keyword-group { margin-top: 6px; }
+  .keyword-group-label { font-size: 11.5px; font-weight: 600; color: var(--text-secondary); margin-bottom: 5px; }
+
+  /* Settings footer: export/import/reset */
+  .settings-footer {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .settings-footer-group { display: flex; gap: 6px; }
+
+  .btn-outline {
+    font-family: var(--font); font-size: 11.5px; font-weight: 600;
+    padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border);
+    background: var(--bg-secondary); color: var(--text-secondary);
+    cursor: pointer; transition: all 0.15s; display: flex; align-items: center; gap: 4px;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+  .btn-outline.danger { color: var(--text-tertiary); }
+  .btn-outline.danger:hover { border-color: var(--sponsored); color: var(--sponsored); background: rgba(232,85,61,0.06); }
+
+  /* ── FILTERED TAB ── */
+  .filtered-item {
+    display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px;
+    background: var(--bg-secondary); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); margin-bottom: 6px; transition: background 0.15s;
+  }
+  .filtered-item:hover { background: var(--accent-soft); }
+  .filtered-avatar {
+    width: 34px; height: 34px; border-radius: 50%; background: var(--bg-tertiary);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 600; font-size: 13px; color: var(--text-secondary); flex-shrink: 0;
+  }
+  .filtered-body { flex: 1; min-width: 0; }
+  .filtered-meta { display: flex; align-items: center; gap: 6px; margin-bottom: 3px; }
+  .filtered-author { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+  .filtered-badge {
+    font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+    padding: 2px 7px; border-radius: 10px; color: white;
+  }
+  .filtered-preview {
+    font-size: 12.5px; color: var(--text-secondary); line-height: 1.4;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .filtered-actions { display: flex; gap: 5px; margin-top: 6px; }
+  .btn-sm {
+    font-family: var(--font); font-size: 11px; font-weight: 600;
+    padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border);
+    background: var(--bg-tertiary); color: var(--text-secondary); cursor: pointer; transition: all 0.15s;
+  }
+  .btn-sm:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+  .btn-sm.recat { border-color: var(--ai-hype); color: var(--ai-hype); background: rgba(139,92,246,0.06); }
+  .btn-sm.recat:hover { background: rgba(139,92,246,0.12); }
+  .filtered-time { font-family: var(--mono); font-size: 10px; color: var(--text-tertiary); flex-shrink: 0; margin-top: 2px; }
+
+  .recat-dropdown {
+    display: none; margin-top: 6px; padding: 6px;
+    background: var(--bg-secondary); border: 1px solid var(--border);
+    border-radius: 8px; box-shadow: var(--shadow-md);
+  }
+  .recat-dropdown.show { display: block; }
+  .recat-option {
+    display: flex; align-items: center; gap: 6px; padding: 5px 8px;
+    border-radius: 6px; cursor: pointer; font-size: 12px; color: var(--text-primary); transition: background 0.1s;
+  }
+  .recat-option:hover { background: var(--accent-soft); }
+  .recat-note {
+    font-size: 10.5px; color: var(--text-tertiary); padding: 5px 8px 2px;
+    border-top: 1px solid var(--border); margin-top: 3px;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    padding: 8px 20px; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center; background: var(--bg-secondary);
+  }
+  .footer-text { font-family: var(--mono); font-size: 10px; color: var(--text-tertiary); }
+  .footer-actions { display: flex; gap: 6px; }
+  .footer-btn {
+    font-family: var(--font); font-size: 10.5px; font-weight: 500;
+    padding: 3px 8px; border-radius: 6px; border: 1px solid var(--border);
+    background: transparent; color: var(--text-tertiary); cursor: pointer; transition: all 0.15s;
+  }
+  .footer-btn:hover { color: var(--sponsored); border-color: var(--sponsored); }
+</style>
+</head>
+<body>
+<div class="mockup-wrapper" id="app">
+  <div class="mockup-label">LinkedIn Filter [JTY] — v3 Mockup</div>
+
+  <div class="popup">
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header-left">
+        <div class="logo">JTY</div>
+        <div class="header-title">LinkedIn Filter <span>v0.1</span></div>
+      </div>
+      <div class="header-controls">
+        <div class="toggle-track active" id="masterToggle" onclick="this.classList.toggle('active')">
+          <div class="toggle-thumb"></div>
+        </div>
+        <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">☀️</button>
+      </div>
+    </div>
+
+    <!-- TAB BAR -->
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab('summary', this)">📊 Summary</button>
+      <button class="tab-btn" onclick="switchTab('settings', this)">⚙️ Settings</button>
+      <button class="tab-btn" onclick="switchTab('filtered', this)">🚫 Filtered <span style="font-family:var(--mono);font-size:10px;opacity:0.7;">(23)</span></button>
+    </div>
+
+    <!-- ═══════════ SUMMARY TAB ═══════════ -->
+    <div class="tab-content active" id="tab-summary" style="max-height:520px;">
+      <!-- 4-column stat strip -->
+      <div class="summary-strip">
+        <div class="stat-card">
+          <div class="stat-value">87</div>
+          <div class="stat-label">Scanned</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">23</div>
+          <div class="stat-label">Hidden</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">26%</div>
+          <div class="stat-label">Filter Rate</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value small-text" style="color:var(--sponsored);">Sponsored</div>
+          <div class="stat-label">Top Filtered</div>
+        </div>
+      </div>
+
+      <!-- Chart with side legend -->
+      <div class="chart-container">
+        <div class="chart-header">
+          <div class="chart-title">Show vs. Hidden Breakdown</div>
+          <div class="time-toggle">
+            <button class="time-btn active" onclick="setTimeToggle(this)">Session</button>
+            <button class="time-btn" onclick="setTimeToggle(this)">All Time</button>
+          </div>
+        </div>
+        <div class="chart-body">
+          <div class="pie-wrapper" id="pieChart">
+            <svg class="pie-svg" viewBox="0 0 200 200">
+              <circle cx="100" cy="100" r="80" fill="none" stroke="var(--accent)" stroke-width="36" stroke-dasharray="370.7 503.2" stroke-dashoffset="0" style="cursor:pointer;" />
+              <circle cx="100" cy="100" r="80" fill="none" stroke="var(--sponsored)" stroke-width="36" stroke-dasharray="46.2 503.2" stroke-dashoffset="-370.7" style="cursor:pointer;" />
+              <circle cx="100" cy="100" r="80" fill="none" stroke="var(--hiring)" stroke-width="36" stroke-dasharray="28.9 503.2" stroke-dashoffset="-416.9" style="cursor:pointer;" />
+              <circle cx="100" cy="100" r="80" fill="none" stroke="var(--ai-hype)" stroke-width="36" stroke-dasharray="34.7 503.2" stroke-dashoffset="-445.8" style="cursor:pointer;" />
+              <circle cx="100" cy="100" r="80" fill="none" stroke="var(--job-seeking)" stroke-width="36" stroke-dasharray="17.4 503.2" stroke-dashoffset="-480.5" style="cursor:pointer;" />
+              <circle cx="100" cy="100" r="80" fill="none" stroke="var(--general)" stroke-width="36" stroke-dasharray="5.5 503.2" stroke-dashoffset="-497.9" style="cursor:pointer;" />
+            </svg>
+            <div class="pie-center-label">
+              <div class="pie-center-number">74%</div>
+              <div class="pie-center-sub">64 posts</div>
+              <div class="pie-center-text">shown</div>
+            </div>
+            <div class="pie-tooltip" id="pieTooltip"></div>
+          </div>
+
+          <div class="chart-legend">
+            <div class="legend-item">
+              <div class="legend-dot" style="background:var(--accent)"></div>
+              <span class="legend-label">Shown</span>
+              <span class="legend-count">64</span>
+              <span class="legend-pct">73.6%</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:var(--sponsored)"></div>
+              <span class="legend-label">Sponsored</span>
+              <span class="legend-count">8</span>
+              <span class="legend-pct">9.2%</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:var(--hiring)"></div>
+              <span class="legend-label">Hiring</span>
+              <span class="legend-count">5</span>
+              <span class="legend-pct">5.7%</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:var(--ai-hype)"></div>
+              <span class="legend-label">AI Hype</span>
+              <span class="legend-count">6</span>
+              <span class="legend-pct">6.9%</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:var(--job-seeking)"></div>
+              <span class="legend-label">Job Seeking</span>
+              <span class="legend-count">3</span>
+              <span class="legend-pct">3.4%</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:var(--general)"></div>
+              <span class="legend-label">Uncategorized</span>
+              <span class="legend-count">1</span>
+              <span class="legend-pct">1.1%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════ SETTINGS TAB ═══════════ -->
+    <div class="tab-content" id="tab-settings" style="max-height:520px;">
+      <div class="section-label">Category Filters <span class="section-hint">(click row to edit rules · drag ⠿ to reorder)</span></div>
+
+      <div class="category-row" id="cat-sponsored">
+        <div class="category-row-header" onclick="toggleExpand('cat-sponsored')">
+          <div class="cat-left">
+            <span class="lock-icon">🔒</span>
+            <div class="priority-badge">1</div>
+            <div class="cat-dot" style="background:var(--sponsored)"></div>
+            <span class="cat-name">Sponsored / Promoted</span>
+            <span class="cat-count">8</span>
+          </div>
+          <div class="cat-right">
+            <span class="cat-expand">▼</span>
+            <div class="mini-toggle active" onclick="event.stopPropagation();this.classList.toggle('active')"><div class="mini-thumb"></div></div>
+          </div>
+        </div>
+        <div class="cat-keywords-panel">
+          <div class="cat-keywords-note">Detected via LinkedIn's built-in "Promoted" label — no keywords needed.</div>
+        </div>
+      </div>
+
+      <div class="category-row" id="cat-hiring">
+        <div class="category-row-header" onclick="toggleExpand('cat-hiring')">
+          <div class="cat-left">
+            <span class="drag-handle">⠿</span>
+            <div class="priority-badge">2</div>
+            <div class="cat-dot" style="background:var(--hiring)"></div>
+            <span class="cat-name">Hiring / Open Roles</span>
+            <span class="cat-count">5</span>
+          </div>
+          <div class="cat-right">
+            <span class="cat-expand">▼</span>
+            <div class="mini-toggle active" onclick="event.stopPropagation();this.classList.toggle('active')"><div class="mini-thumb"></div></div>
+          </div>
+        </div>
+        <div class="cat-keywords-panel">
+          <div class="cat-keywords-label">Detection Keywords</div>
+          <div class="tag-input-area">
+            <div class="tag">we're hiring <span class="tag-x">×</span></div>
+            <div class="tag">#hiring <span class="tag-x">×</span></div>
+            <div class="tag">open role <span class="tag-x">×</span></div>
+            <div class="tag">open position <span class="tag-x">×</span></div>
+            <div class="tag">apply now <span class="tag-x">×</span></div>
+            <span class="tag-placeholder">+ Add keyword...</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="category-row expanded" id="cat-ai">
+        <div class="category-row-header" onclick="toggleExpand('cat-ai')">
+          <div class="cat-left">
+            <span class="drag-handle">⠿</span>
+            <div class="priority-badge">3</div>
+            <div class="cat-dot" style="background:var(--ai-hype)"></div>
+            <span class="cat-name">AI Hype / Buzzwords</span>
+            <span class="cat-count">6</span>
+          </div>
+          <div class="cat-right">
+            <span class="cat-expand">▼</span>
+            <div class="mini-toggle active" onclick="event.stopPropagation();this.classList.toggle('active')"><div class="mini-thumb"></div></div>
+          </div>
+        </div>
+        <div class="cat-keywords-panel">
+          <div class="cat-keywords-label">Detection Keywords</div>
+          <div class="tag-input-area">
+            <div class="tag">AI will replace <span class="tag-x">×</span></div>
+            <div class="tag">#generativeai <span class="tag-x">×</span></div>
+            <div class="tag">prompt engineering <span class="tag-x">×</span></div>
+            <div class="tag">10x productivity <span class="tag-x">×</span></div>
+            <span class="tag-placeholder">+ Add keyword...</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="category-row" id="cat-jobseek">
+        <div class="category-row-header" onclick="toggleExpand('cat-jobseek')">
+          <div class="cat-left">
+            <span class="drag-handle">⠿</span>
+            <div class="priority-badge">4</div>
+            <div class="cat-dot" style="background:var(--job-seeking)"></div>
+            <span class="cat-name">Layoffs / Job Seeking</span>
+            <span class="cat-count">3</span>
+          </div>
+          <div class="cat-right">
+            <span class="cat-expand">▼</span>
+            <div class="mini-toggle" onclick="event.stopPropagation();this.classList.toggle('active')"><div class="mini-thumb"></div></div>
+          </div>
+        </div>
+        <div class="cat-keywords-panel">
+          <div class="cat-keywords-label">Detection Keywords</div>
+          <div class="tag-input-area">
+            <div class="tag">laid off <span class="tag-x">×</span></div>
+            <div class="tag">#opentowork <span class="tag-x">×</span></div>
+            <div class="tag">open to opportunities <span class="tag-x">×</span></div>
+            <div class="tag">looking for my next <span class="tag-x">×</span></div>
+            <span class="tag-placeholder">+ Add keyword...</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="category-row" id="cat-uncat">
+        <div class="category-row-header" onclick="toggleExpand('cat-uncat')">
+          <div class="cat-left">
+            <span class="lock-icon">🔒</span>
+            <div class="priority-badge">∞</div>
+            <div class="cat-dot" style="background:var(--general)"></div>
+            <span class="cat-name">Uncategorized</span>
+            <span class="cat-count">1</span>
+          </div>
+          <div class="cat-right">
+            <span class="cat-expand">▼</span>
+            <div class="mini-toggle" onclick="event.stopPropagation();this.classList.toggle('active')"><div class="mini-thumb"></div></div>
+          </div>
+        </div>
+        <div class="cat-keywords-panel">
+          <div class="cat-keywords-note">Catch-all for posts matching no other category. Always last in priority.</div>
+        </div>
+      </div>
+
+      <button class="add-category-btn">＋ Add Custom Category</button>
+
+      <!-- Exceptions -->
+      <div class="exceptions-box">
+        <div class="section-label">Always Show (People & Companies)</div>
+        <div class="tag-input-area">
+          <div class="tag">Satya Nadella <span class="tag-x">×</span></div>
+          <div class="tag">OpenAI <span class="tag-x">×</span></div>
+          <div class="tag">Lenny Rachitsky <span class="tag-x">×</span></div>
+          <span class="tag-placeholder">+ Add name...</span>
+        </div>
+      </div>
+
+      <div class="keyword-section">
+        <div class="section-label">Global Keyword Overrides</div>
+        <div class="keyword-group">
+          <div class="keyword-group-label">🔴 Always hide posts containing:</div>
+          <div class="tag-input-area">
+            <div class="tag">thought leader <span class="tag-x">×</span></div>
+            <div class="tag">game changer <span class="tag-x">×</span></div>
+            <span class="tag-placeholder">+ Add keyword...</span>
+          </div>
+        </div>
+        <div class="keyword-group" style="margin-top:8px;">
+          <div class="keyword-group-label">🟢 Always show posts containing:</div>
+          <div class="tag-input-area">
+            <div class="tag">#productmanagement <span class="tag-x">×</span></div>
+            <div class="tag">product strategy <span class="tag-x">×</span></div>
+            <span class="tag-placeholder">+ Add keyword...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Export / Import / Reset -->
+      <div class="settings-footer">
+        <div class="settings-footer-group">
+          <button class="btn-outline" onclick="alert('Downloads linkedin-filter-settings.json with all categories, keywords, exceptions, and overrides.')">📤 Export</button>
+          <button class="btn-outline" onclick="alert('Opens file picker to import a .json settings file.')">📥 Import</button>
+        </div>
+        <button class="btn-outline danger" onclick="alert('Reloads settings from bundled default-settings.json, discarding all customizations.')">↺ Reset to Defaults</button>
+      </div>
+    </div>
+
+    <!-- ═══════════ FILTERED TAB ═══════════ -->
+    <div class="tab-content" id="tab-filtered" style="max-height:520px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <div class="section-label" style="margin:0;">Filtered This Session</div>
+        <button class="btn-sm">Restore All</button>
+      </div>
+
+      <div class="filtered-item">
+        <div class="filtered-avatar">AJ</div>
+        <div class="filtered-body">
+          <div class="filtered-meta">
+            <span class="filtered-author">Alex Johnson</span>
+            <span class="filtered-badge" style="background:var(--sponsored)">Sponsored</span>
+          </div>
+          <div class="filtered-preview">🚀 Ready to supercharge your workflow? Our new AI-powered platform helps teams collaborate 10x faster...</div>
+          <div class="filtered-actions">
+            <button class="btn-sm">👁 Show</button>
+            <button class="btn-sm">✚ Whitelist</button>
+            <button class="btn-sm recat" onclick="toggleRecat(this)">🏷 Recategorize</button>
+          </div>
+          <div class="recat-dropdown">
+            <div class="recat-option"><div class="cat-dot" style="background:var(--hiring);width:7px;height:7px;"></div> Hiring</div>
+            <div class="recat-option"><div class="cat-dot" style="background:var(--ai-hype);width:7px;height:7px;"></div> AI Hype</div>
+            <div class="recat-option"><div class="cat-dot" style="background:var(--job-seeking);width:7px;height:7px;"></div> Job Seeking</div>
+            <div class="recat-option"><div class="cat-dot" style="background:var(--general);width:7px;height:7px;"></div> Uncategorized</div>
+            <div class="recat-note">💡 Option to add a keyword from this post to target category</div>
+          </div>
+        </div>
+        <span class="filtered-time">2m</span>
+      </div>
+
+      <div class="filtered-item">
+        <div class="filtered-avatar">SR</div>
+        <div class="filtered-body">
+          <div class="filtered-meta">
+            <span class="filtered-author">Sarah Ramirez</span>
+            <span class="filtered-badge" style="background:var(--hiring)">Hiring</span>
+          </div>
+          <div class="filtered-preview">🔥 We're hiring! Looking for a Senior Product Designer to join our amazing team...</div>
+          <div class="filtered-actions">
+            <button class="btn-sm">👁 Show</button>
+            <button class="btn-sm">✚ Whitelist</button>
+            <button class="btn-sm recat" onclick="toggleRecat(this)">🏷 Recategorize</button>
+          </div>
+          <div class="recat-dropdown">
+            <div class="recat-option"><div class="cat-dot" style="background:var(--sponsored);width:7px;height:7px;"></div> Sponsored</div>
+            <div class="recat-option"><div class="cat-dot" style="background:var(--ai-hype);width:7px;height:7px;"></div> AI Hype</div>
+            <div class="recat-option"><div class="cat-dot" style="background:var(--job-seeking);width:7px;height:7px;"></div> Job Seeking</div>
+            <div class="recat-option"><div class="cat-dot" style="background:var(--general);width:7px;height:7px;"></div> Uncategorized</div>
+            <div class="recat-note">💡 Option to add a keyword from this post to target category</div>
+          </div>
+        </div>
+        <span class="filtered-time">8m</span>
+      </div>
+
+      <div class="filtered-item">
+        <div class="filtered-avatar">MC</div>
+        <div class="filtered-body">
+          <div class="filtered-meta">
+            <span class="filtered-author">Mike Chen</span>
+            <span class="filtered-badge" style="background:var(--ai-hype)">AI Hype</span>
+          </div>
+          <div class="filtered-preview">AI will replace 80% of jobs by 2027. Here are 10 things you NEED to learn RIGHT NOW...</div>
+          <div class="filtered-actions">
+            <button class="btn-sm">👁 Show</button>
+            <button class="btn-sm">✚ Whitelist</button>
+            <button class="btn-sm recat" onclick="toggleRecat(this)">🏷 Recategorize</button>
+          </div>
+          <div class="recat-dropdown">
+            <div class="recat-option"><div class="cat-dot" style="background:var(--sponsored);width:7px;height:7px;"></div> Sponsored</div>
+            <div class="recat-option"><div class="cat-dot" style="background:var(--hiring);width:7px;height:7px;"></div> Hiring</div>
+            <div class="recat-option"><div class="cat-dot" style="background:var(--job-seeking);width:7px;height:7px;"></div> Job Seeking</div>
+            <div class="recat-option"><div class="cat-dot" style="background:var(--general);width:7px;height:7px;"></div> Uncategorized</div>
+            <div class="recat-note">💡 Option to add a keyword from this post to target category</div>
+          </div>
+        </div>
+        <span class="filtered-time">14m</span>
+      </div>
+
+      <div class="filtered-item">
+        <div class="filtered-avatar">LP</div>
+        <div class="filtered-body">
+          <div class="filtered-meta">
+            <span class="filtered-author">Lisa Park</span>
+            <span class="filtered-badge" style="background:var(--job-seeking)">Job Seeking</span>
+          </div>
+          <div class="filtered-preview">After 12 years, today was my last day. I was part of the latest round of layoffs...</div>
+          <div class="filtered-actions">
+            <button class="btn-sm">👁 Show</button>
+            <button class="btn-sm">✚ Whitelist</button>
+            <button class="btn-sm recat" onclick="toggleRecat(this)">🏷 Recategorize</button>
+          </div>
+          <div class="recat-dropdown">
+            <div class="recat-option"><div class="cat-dot" style="background:var(--sponsored);width:7px;height:7px;"></div> Sponsored</div>
+            <div class="recat-option"><div class="cat-dot" style="background:var(--hiring);width:7px;height:7px;"></div> Hiring</div>
+            <div class="recat-option"><div class="cat-dot" style="background:var(--ai-hype);width:7px;height:7px;"></div> AI Hype</div>
+            <div class="recat-option"><div class="cat-dot" style="background:var(--general);width:7px;height:7px;"></div> Uncategorized</div>
+            <div class="recat-note">💡 Option to add a keyword from this post to target category</div>
+          </div>
+        </div>
+        <span class="filtered-time">22m</span>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <span class="footer-text">23 filtered · 87 scanned · session 42m</span>
+      <div class="footer-actions">
+        <button class="footer-btn">Reset Stats</button>
+        <button class="footer-btn">Clear Log</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function switchTab(name, btn) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    btn.classList.add('active');
+  }
+  function toggleTheme() {
+    const btn = document.getElementById('themeBtn');
+    if (document.documentElement.hasAttribute('data-theme')) {
+      document.documentElement.removeAttribute('data-theme');
+      btn.textContent = '☀️';
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      btn.textContent = '🌙';
+    }
+  }
+  function toggleExpand(id) { document.getElementById(id).classList.toggle('expanded'); }
+  function toggleRecat(btn) {
+    const dd = btn.closest('.filtered-body').querySelector('.recat-dropdown');
+    dd.classList.toggle('show');
+  }
+  function setTimeToggle(btn) {
+    btn.parentElement.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  const sliceData = [
+    { label: 'Shown', count: 64, pct: '73.6%' },
+    { label: 'Sponsored', count: 8, pct: '9.2%' },
+    { label: 'Hiring', count: 5, pct: '5.7%' },
+    { label: 'AI Hype', count: 6, pct: '6.9%' },
+    { label: 'Job Seeking', count: 3, pct: '3.4%' },
+    { label: 'Uncategorized', count: 1, pct: '1.1%' },
+  ];
+  const circles = document.querySelectorAll('.pie-svg circle');
+  const tooltip = document.getElementById('pieTooltip');
+  circles.forEach((circle, i) => {
+    circle.addEventListener('mouseenter', () => {
+      tooltip.innerHTML = `<strong>${sliceData[i].label}</strong>: ${sliceData[i].count} posts (${sliceData[i].pct})`;
+      tooltip.classList.add('show');
+    });
+    circle.addEventListener('mousemove', (e) => {
+      const rect = document.getElementById('pieChart').getBoundingClientRect();
+      tooltip.style.left = (e.clientX - rect.left + 12) + 'px';
+      tooltip.style.top = (e.clientY - rect.top - 30) + 'px';
+    });
+    circle.addEventListener('mouseleave', () => tooltip.classList.remove('show'));
+  });
+</script>
+</body>
+</html>
