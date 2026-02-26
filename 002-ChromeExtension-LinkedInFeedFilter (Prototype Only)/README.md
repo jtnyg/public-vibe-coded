@@ -1,4 +1,4 @@
-# Project 002 — Chrome Extension: LinkedIn Post Filter (HOLD / PROTOTYPE ONLY)
+# Project 002 Retro — Chrome Extension: LinkedIn Post Filter (HOLD / PROTOTYPE ONLY)
 
 **Date:** 2026-02-24
 **Complexity:** ⭐
@@ -54,3 +54,4 @@ For my second LLM vibe coding project, I wanted to stick with Chrome Extensions 
 - I want to pivot this to something more open (maybe RSS feeds to filter news); I think  Chrome apps are a thing?
 - Improve setting PRD/ways of working/approach at first contact. 
 - Validate as much as possible; maybe build a lower DEV/SIT environment for more serious builds.
+
