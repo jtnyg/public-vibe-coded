@@ -1,0 +1,59 @@
+/* View Image Button - Styled to match Google's native UI */
+
+.vi-ext-view-image-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 16px;
+  height: 36px;
+  border: none;
+  border-radius: 18px;
+  background-color: #1a73e8;
+  color: #ffffff;
+  font-family: "Google Sans", Roboto, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.25px;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+  line-height: 36px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.vi-ext-view-image-btn:visited {
+  color: #ffffff;
+}
+
+.vi-ext-view-image-btn:hover {
+  background-color: #1765cc;
+  box-shadow: 0 1px 3px rgba(26, 115, 232, 0.35);
+}
+
+.vi-ext-view-image-btn:active {
+  background-color: #1558b0;
+  box-shadow: none;
+}
+
+.vi-ext-view-image-btn:focus-visible {
+  outline: 2px solid #1a73e8;
+  outline-offset: 2px;
+}
+
+/* SVG icon inside the button */
+.vi-ext-view-image-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+/* Container to hold both buttons side by side */
+.vi-ext-button-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}

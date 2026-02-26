@@ -1,0 +1,45 @@
+{
+  "manifest_version": 3,
+  "name": "Google: View Image [JTY]",
+  "version": "2.1",
+  "description": "Adds a 'View Image' button to Google Images results. Privacy-first: no tracking, no external requests, no data collection. Created by iterating with Claude on Feb 23, 2026. How it works: This extension only activates on Google Images pages. When you click a search result and the preview panel appears, it reads the image URL that Google already loaded in the page, strips resize parameters to get the full-resolution version, and places a clickable 'View image' link next to the existing 'Visit' button. That link opens the actual image file in a new tab. Nothing is collected, stored, or sent anywhere.",
+  "author": "Jeff Y via Claude",
+
+  "permissions": [],
+
+  "host_permissions": [],
+
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/search*",
+        "https://www.google.co.uk/search*",
+        "https://www.google.ca/search*",
+        "https://www.google.com.au/search*",
+        "https://www.google.de/search*",
+        "https://www.google.fr/search*",
+        "https://www.google.es/search*",
+        "https://www.google.it/search*",
+        "https://www.google.co.jp/search*",
+        "https://www.google.com.br/search*",
+        "https://www.google.co.in/search*",
+        "https://www.google.nl/search*",
+        "https://www.google.se/search*",
+        "https://www.google.com.mx/search*"
+      ],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ],
+
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'; base-uri 'none';"
+  },
+
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
