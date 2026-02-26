@@ -17,8 +17,8 @@ For my second LLM vibe coding project, I wanted to stick with Chrome Extensions 
 - When I got back to my desk, I excitedly created the folder structure copy/pasting code to validate functionality and what do I see? Gemini told me a core requirement was "slated for phase 2" <-- when did we discuss this?! That's REALLY BAD. Is Gemini an overpromising, yes-man that requires infeasible levels of handholding and validation?
 <br> <img src="gemini-output.png" width="400" alt="Gemini Output" />
 - Anyways, I fired Gemini 3 Pro and went back to trusty Claude Opus. I gave Claude my conversation history from Gemini and Claude said: Yup, you're trying to build a chrome tab memory saver? what? No... so clearly something funny is going on with data ingestion. 
-- Claude made a beautiful UI, and told me the code works! Nope. I have it HTML thinking it would be like the View Image project, but wow Linkedin really obfuscates its HTML with random characters strings. 
-- Reviewing the HTML, i saw among the sea of randomly generated div tags names like: [role="listitem"] for the post container and [data-testid="expandable-text-box"] for text, but I wasn't going to parse through all randomly generated html and figure out the regex code (+ learned scraping linkedin breaks their terms and conditions). Ah so I decided to stop. But, silver lining: it would be pretty useful if it worked.
+- Claude made a beautiful UI, and told me the code works! Nope. I gave it HTML thinking it would be like the View Image project, but wow Linkedin really obfuscates its HTML with random characters strings. 
+- Reviewing the HTML, i saw among the sea of randomly generated div tags names like: [role="listitem"] for the post container and [data-testid="expandable-text-box"] for text. Claude couldn't figure it out and I wasn't going to parse through all randomly generated html and figure out the regex code (+ learned web scraping breaks linkedin's terms and conditions). Ah so I decided to stop. But, silver lining: it would be pretty useful if it worked.
 <br> [Link to Prototype of LinkedIn Post Filter Chrome Extension](https://htmlpreview.github.io/?https://github.com/jtnyg/public-vibe-coded/blob/main/002-ChromeExtension-LinkedInFeedFilter%20(Prototype%20Only)/PROTOTYPE-linkedin-filter-mockup-v3.html)
 <br> <img src="claude-output.png" width="400" alt="Claude Output" />
  
@@ -54,4 +54,5 @@ For my second LLM vibe coding project, I wanted to stick with Chrome Extensions 
 - I want to pivot this to something more open (maybe RSS feeds to filter news); I think  Chrome apps are a thing?
 - Improve setting PRD/ways of working/approach at first contact. 
 - Validate as much as possible; maybe build a lower DEV/SIT environment for more serious builds.
+
 
